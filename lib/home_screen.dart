@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:promo_club/login_screen.dart';
+import 'package:promo_club/request_account_screen.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -58,7 +59,10 @@ class HomeScreen extends StatelessWidget {
                   width:double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Lógica do botão de solicitar cadastro
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RequestAccountScreen(),),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFA9B559), // Cor do botão
