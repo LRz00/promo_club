@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:promo_club/main_home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -64,6 +65,10 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // Lógica de login
+                     Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  MainHomeScreen(),),
+                      );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFA9B559), // Cor do botão
