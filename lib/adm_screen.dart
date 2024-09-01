@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:promo_club/register_user_screen.dart';
+import 'package:promo_club/store_register_screen.dart';
 
 class AdminScreen extends StatelessWidget {
+  const AdminScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +34,10 @@ class AdminScreen extends StatelessWidget {
                 'CADASTRAR USUARIO',
                 const Color(0xFF014C63),
                 () {
-                  // Ação ao clicar em Cadastrar Usuário
+                  Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterUserScreen(),),
+                      );
                 },
               ),
               const SizedBox(height: 16),
@@ -39,7 +46,10 @@ class AdminScreen extends StatelessWidget {
                 'CADASTRAR COMERCIO',
                 const Color(0xFF014C63),
                 () {
-                  // Ação ao clicar em Cadastrar Comércio
+                  Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterStoreScreen(),),
+                      );
                 },
               ),
               const SizedBox(height: 16),
