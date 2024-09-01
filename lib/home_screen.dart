@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:promo_club/login_screen.dart';
 import 'package:promo_club/request_account_screen.dart';
-
+import 'package:promo_club/adm_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -75,6 +75,20 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.white), ),
                   ),
                 ),
+                const SizedBox(height: 10),
+              
+              TextButton(
+                onPressed: () {
+                       Navigator.push(
+                         context,
+                        MaterialPageRoute(builder: (context) =>  AdminScreen(),),
+                      );
+                },
+                child: const Text(
+                  'Administrador?',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
               ],
             ),
           ),
