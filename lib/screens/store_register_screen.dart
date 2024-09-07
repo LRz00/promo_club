@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:promo_club/entity/shop.dart';
+import 'package:promo_club/services/firestore.dart';
 
-class RegisterStoreScreen extends StatelessWidget{
+class RegisterStoreScreen extends StatefulWidget {
+  @override
+  _RegisterStoreScreenState createState() => _RegisterStoreScreenState();
+}
+
+class _RegisterStoreScreenState extends State<RegisterStoreScreen> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _ownerController = TextEditingController();
+  final TextEditingController _cnpjController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  String _selectedRegion = 'Irecê, BA';
+
+  final FirestoreService _firestoreService = FirestoreService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +29,7 @@ class RegisterStoreScreen extends StatelessWidget{
           },
         ),
       ),
-      body: SingleChildScrollView(  // Solução para evitar overflow
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -24,20 +39,27 @@ class RegisterStoreScreen extends StatelessWidget{
               height: 80,
             ),
             const SizedBox(height: 24),
-            _buildTextField('Nome:', 'Loja Almeida'),
+            _buildTextField('Nome:', 'Loja Almeida', _nameController),
             const SizedBox(height: 16),
-            _buildTextField('Proprietario:', 'João Souza'),
+            _buildTextField('Proprietário:', 'João Souza', _ownerController),
             const SizedBox(height: 16),
-            _buildTextField('CNPJ:', '00.123.456/0001-23'),
+            _buildTextField('CNPJ:', '00.123.456/0001-23', _cnpjController),
             const SizedBox(height: 16),
             _buildDropdownField(
-                'Região:', ['Irecê, BA', 'Barra do Mendes', 'Outros']),
+              'Região:', 
+              ['Irecê, BA', 'Barra do Mendes', 'Outros'],
+              (newValue) {
+                setState(() {
+                  _selectedRegion = newValue!;
+                });
+              },
+            ),
             const SizedBox(height: 16),
-            _buildTextField('Endereço:', 'Rua, Numero, Bairro'),
+            _buildTextField('Endereço:', 'Rua, Número, Bairro', _addressController),
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
-                // Ação de cadastro
+                _addStore();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF014C63),
@@ -57,8 +79,7 @@ class RegisterStoreScreen extends StatelessWidget{
     );
   }
 
-  Widget _buildTextField(String label, String hintText,
-      {bool obscureText = false}) {
+  Widget _buildTextField(String label, String hintText, TextEditingController controller, {bool obscureText = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -71,6 +92,7 @@ class RegisterStoreScreen extends StatelessWidget{
         ),
         const SizedBox(height: 8),
         TextField(
+          controller: controller,
           obscureText: obscureText,
           decoration: InputDecoration(
             hintText: hintText,
@@ -85,8 +107,7 @@ class RegisterStoreScreen extends StatelessWidget{
     );
   }
 
-  Widget _buildDropdownField(String label, List<String> options) {
-    String selectedValue = options.first;
+  Widget _buildDropdownField(String label, List<String> options, ValueChanged<String?> onChanged) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -99,16 +120,14 @@ class RegisterStoreScreen extends StatelessWidget{
         ),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: selectedValue,
+          value: _selectedRegion,
           items: options.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),
             );
           }).toList(),
-          onChanged: (newValue) {
-            selectedValue = newValue!;
-          },
+          onChanged: onChanged,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
@@ -119,5 +138,30 @@ class RegisterStoreScreen extends StatelessWidget{
         ),
       ],
     );
+  }
+
+  void _addStore() {
+    // Crie uma instância de Shop
+    Shop shop = Shop(
+      id: DateTime.now().millisecondsSinceEpoch, // ID único
+      name: _nameController.text,
+      owner: _ownerController.text,
+      cnpj: _cnpjController.text,
+      region: _selectedRegion,
+      address: _addressController.text,
+    );
+
+    // Chame a função addStore do FirestoreService
+    _firestoreService.addStore(shop).then((_) {
+      // Mostre uma mensagem de sucesso ou navegue para outra tela
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Loja cadastrada com sucesso!')),
+      );
+    }).catchError((error) {
+      // Mostre uma mensagem de erro
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Falha ao cadastrar loja: $error')),
+      );
+    });
   }
 }

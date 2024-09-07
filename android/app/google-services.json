@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1048160192798",
+    "project_id": "promo-club-46acd",
+    "storage_bucket": "promo-club-46acd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048160192798:android:b240b99fdf049bd7f2a10f",
+        "android_client_info": {
+          "package_name": "com.example.promo_club"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMj4Qf2hTq1NsdLaJ1IOBIDVHeLTlGgG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

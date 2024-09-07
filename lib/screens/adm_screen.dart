@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:promo_club/register_user_screen.dart';
-import 'package:promo_club/store_register_screen.dart';
+import 'package:promo_club/screens/register_user_screen.dart';
+import 'package:promo_club/screens/store_register_screen.dart';
 
 class AdminScreen extends StatelessWidget {
   const AdminScreen({super.key});

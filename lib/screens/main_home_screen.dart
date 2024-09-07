@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promo_club/categories_screen.dart';
-import 'package:promo_club/profile_screen.dart';
-import 'package:promo_club/stores_list_screen.dart';
+import 'package:promo_club/screens/categories_screen.dart';
+import 'package:promo_club/screens/profile_screen.dart';
+import 'package:promo_club/screens/stores_list_screen.dart';
 
 class MainHomeScreen extends StatefulWidget {
   @override

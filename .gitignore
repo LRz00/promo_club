@@ -48,3 +48,7 @@ linux/
 macos/
 web/
 windows/
+
+#Firebase Security
+
+lib/firebase_options.dart

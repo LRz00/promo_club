@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promo_club/login_screen.dart';
-import 'package:promo_club/request_account_screen.dart';
-import 'package:promo_club/adm_screen.dart';
+import 'package:promo_club/screens/login_screen.dart';
+import 'package:promo_club/screens/request_account_screen.dart';
+import 'package:promo_club/screens/adm_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
