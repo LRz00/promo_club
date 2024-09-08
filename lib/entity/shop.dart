@@ -7,6 +7,7 @@ class Shop{
     final String cnpj;
     final String region;
     final String address;
+    final String category;
 
   Shop({
     required this.id,
@@ -14,7 +15,8 @@ class Shop{
     required this.owner,
     required this.cnpj,
     required this.region,
-    required this.address
+    required this.address,
+    required this.category
   });
 
   factory Shop.fromMap(Map<String, dynamic> map){
@@ -24,7 +26,8 @@ class Shop{
       owner: map['owner'] ?? '',
       cnpj: map['cnpj'] ?? '',
       region: map['region'] ?? '',
-      address: map['address'] ?? ''
+      address: map['address'] ?? '',
+      category: map['category'] ?? ''
     );
   }   
 
@@ -35,7 +38,8 @@ class Shop{
       'owner': owner,
       'cnpj': cnpj,
       'region': region,
-      'address': address
+      'address': address,
+      'category': category
     };
   }
 }

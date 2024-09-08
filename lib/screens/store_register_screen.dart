@@ -12,6 +12,8 @@ class _RegisterStoreScreenState extends State<RegisterStoreScreen> {
   final TextEditingController _ownerController = TextEditingController();
   final TextEditingController _cnpjController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _categoryController = TextEditingController();
+
   String _selectedRegion = 'Irecê, BA';
 
   final FirestoreService _firestoreService = FirestoreService();
@@ -44,6 +46,8 @@ class _RegisterStoreScreenState extends State<RegisterStoreScreen> {
             _buildTextField('Proprietário:', 'João Souza', _ownerController),
             const SizedBox(height: 16),
             _buildTextField('CNPJ:', '00.123.456/0001-23', _cnpjController),
+            const SizedBox(height: 16),
+            _buildTextField('Category:', 'Eletronicos', _categoryController),
             const SizedBox(height: 16),
             _buildDropdownField(
               'Região:', 
@@ -149,6 +153,7 @@ class _RegisterStoreScreenState extends State<RegisterStoreScreen> {
       cnpj: _cnpjController.text,
       region: _selectedRegion,
       address: _addressController.text,
+      category: _categoryController.text
     );
 
     // Chame a função addStore do FirestoreService
